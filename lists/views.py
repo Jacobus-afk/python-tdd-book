@@ -4,20 +4,14 @@ from django.shortcuts import render, redirect
 from lists.models import Item
 
 def home_page(request):
-    # return HttpResponse('<html><title>To-Do lists</title></html>')
-
-    # new_item_text = ''
-
     if request.method == 'POST':
         new_item_text = request.POST.get('item_text', '')
         Item.objects.create(text=new_item_text)
-        return redirect('/')
-        # item.text = new_item_text
-        # item.save()
+        return redirect('/lists/the-only-list-in-the-world/')
 
-    # context = {
-    #     'new_item_text': new_item_text,
-    # }
-        # return render(request, 'home.html', context)
+    # items = Item.objects.all()
+    return render(request, 'home.html')#, {'items': items})
+
+def view_list(request):
     items = Item.objects.all()
-    return render(request, 'home.html', {'items': items}) #, context)
+    return render(request, 'list.html', {'items': items})
