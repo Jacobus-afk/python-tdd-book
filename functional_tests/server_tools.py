@@ -10,7 +10,7 @@ def _get_server_env_vars(host):
     return dict(l.split('=') for l in env_lines if l)
 
 def reset_database(host):
-    manage_dot_py = _get_manage_dot_py
+    manage_dot_py = _get_manage_dot_py(host)
     with settings(host_string=f'elspeth@{host}'):
         run(f'{manage_dot_py} flush --noinput')
 
